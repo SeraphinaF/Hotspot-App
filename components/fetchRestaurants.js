@@ -3,7 +3,7 @@ export const fetchRestaurants = async ( latitude, longitude) => {
     const location = `location=${latitude},${longitude}`;
     const radius = '&radius=2000';
     const query = 'restaurant'
-    const apiKey = '&key=AIzaSyA3fJqwsIrMVF8w2XH-XiBwUq-xNO-K4zQ'; 
+    const apiKey = `&key=${process.env.GOOGLE_API_KEY}`; 
     const restaurantSearchUrl = `${url}${location}${radius}&query=${query}${apiKey}`;
  
     console.log(restaurantSearchUrl)

@@ -66,7 +66,7 @@ const RestaurantDetails = ({ route, navigation }) => {
             <ImageBackground className="relative h-56 w-screen"
                 source=
                 {{
-                    uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${restaurant.photos[0].photo_reference}&key=AIzaSyA3fJqwsIrMVF8w2XH-XiBwUq-xNO-K4zQ`,
+                    uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${restaurant.photos[0].photo_reference}&key=${process.env.GOOGLE_API_KEY}`,
                 }}
             >
                 <TouchableOpacity onPress={() => navigation.navigate('ListScreen')}
