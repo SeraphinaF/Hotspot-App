@@ -1,34 +1,46 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react'
-import { StyleSheet, Text, View, } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import React, {useState, useEffect} from "react";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import { LocationProvider } from './LocationContext';
 
-import HomeScreen from './screens/HomeScreen';
-
+//Imports
+import MapScreen from './screens/MapScreen';
+import List from './screens/List';
+import RestaurantDetails from './components/RestaurantDetails';
+import TabNav from './components/TabNav';
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+function App() {
 
-  return (
+    return (
     
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name='Home' component={HomeScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name='MapScreen'
+                    component={MapScreen}
+                    options={{ headerShown: false }}
+                />
 
+                <Stack.Screen name='ListScreen'
+                    component={List}
+                    options={{ headerShown: false }}
+                />
 
-  );
+                <Stack.Screen name='DetailsScreen'
+                    component={RestaurantDetails}
+                    options={{ headerShown: false }}
+                />
+
+                <Stack.Screen name='TabNav'
+                    component={TabNav}
+                    options={{ headerShown: false }}
+                />
+
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
+

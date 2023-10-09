@@ -1,33 +1,44 @@
-import React from "react";
-import { View, StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-// import HomeScreen from '../screens/HomeScreen'
+import { useLocation } from './useLocation';
+// import RestaurantDetails from './RestaurantDetails'
 
 
-const Map = ({ restaurants }) => {
+
+const Map = ({ restaurants, navigation}) => {
+    const { location, latitude, longitude, errorMsg } = useLocation(null);
+  
     return (
-        <View>
-            <MapView style={{ height: 400, width: 400 }}
-                initialRegion={{
-                    latitude: location.coords.latitude,
-                    longitude: location.coords.longitude,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
-                }}
-                provider="google"
-                apiKey="&key= AIzaSyA3fJqwsIrMVF8w2XH-XiBwUq-xNO-K4zQ">
+        <View className="">
+            <Text className="text-slate-600 border-b border-solid mt-36 p-5 text-center text-xl">Restaurants nearby</Text>
+                <MapView className="h-screen w-screen "
+                    showsUserLocation={true}
+                    followsUserLocation={true}
+                    region={{
+                        latitude,
+                        longitude,
+                        latitudeDelta: 0.035,
+                        longitudeDelta: 0.035,
+                    }}
+                    provider="google"
+                    apiKey="&key= AIzaSyA3fJqwsIrMVF8w2XH-XiBwUq-xNO-K4zQ">
 
-                {restaurants.map(restaurant => (
-                    <Marker
-                        key={restaurant.name}
-                        coordinate={{
-                            latitude: restaurant.geometry.location.lat,
-                            longitude: restaurant.geometry.location.lng,
-                        }}
-                        title={restaurant.name}
-                    />
-                ))}
-            </MapView>
+                    {restaurants.map(restaurant => (
+                        <Marker
+                            key={restaurant.id}
+
+                            coordinate={{
+                                latitude: restaurant.geometry.location.lat,
+                                longitude: restaurant.geometry.location.lng,
+                            }}
+                
+                            title={restaurant.name}
+                         
+                        
+                        />
+                    ))}
+                </MapView>
         </View>
     );
 };
